@@ -7,7 +7,7 @@ from .serializers import InspectionSerializer
 class InspectionViewSet(ModelViewSet):
     queryset = (
         Inspection.objects
-        .select_related("noise_log")
+        .select_related("noise_log", "inspected_by")
     )
 
     serializer_class = InspectionSerializer
@@ -29,3 +29,6 @@ class InspectionViewSet(ModelViewSet):
     ]
 
     ordering = ["-created_at"]
+
+    def perform_create(self, serializer):
+        serializer.save(inspected_by=self.request.user)

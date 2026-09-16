@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from .models import Inspection
 
 
@@ -9,6 +8,7 @@ class InspectionSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "noise_log",
+            "inspected_by",
             "inspection_type",
             "findings",
             "status",
@@ -18,6 +18,7 @@ class InspectionSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "id",
+            "inspected_by",
             "created_at",
             "updated_at",
         ]
